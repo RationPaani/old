@@ -27,7 +27,7 @@ test:
 production:
  adapter: postgresql
  encoding: unicode
- database: testdb
+ database: rationpaani
  pool: 5
- username: vaibhav
+ username: sudarshan
  password: g5darshan

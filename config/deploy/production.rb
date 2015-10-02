@@ -1,12 +1,12 @@
-role :app, %w{52.74.136.251}
-role :web, %w{52.74.136.251}
-role :db,  %w{52.74.136.251}
+role :app, %w{54.254.190.184}
+role :web, %w{54.254.190.184}
+role :db,  %w{54.254.190.184}
 
-server '52.74.136.251', user: 'ubuntu', roles: %w{web app}, my_property: :my_value
+server '54.254.190.184', user: 'ubuntu', roles: %w{web app}, my_property: :my_value
 
 # set it globally
   set :ssh_options, {
-    keys: %w(/home/optimus/sud123.pem),
+    keys: %w(/home/optimus/aws_keypair.pem),
     forward_agent: true,
     auth_methods: %w(publickey)
   }
