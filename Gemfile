@@ -19,20 +19,20 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'capistrano', '~> 3.1.0'
-gem 'capistrano-bundler', '~> 1.1.2'
-gem 'capistrano-rvm', github: "capistrano/rvm"
-
 group :development, :test do
-  gem 'capistrano-rails'
-  gem 'byebug'
-  gem 'web-console', '~> 2.0'
-  gem "guard", ">= 2.2.2",       :require => false
-  gem "guard-livereload",        :require => false
-  gem "rack-livereload"
+gem 'capistrano',         require: false
+gem 'capistrano-rvm',     require: false
+gem 'capistrano-rails',   require: false
+gem 'capistrano-bundler', require: false
+gem 'capistrano3-puma',   require: false
+gem 'byebug'
+gem 'web-console', '~> 2.0'
+gem "guard", ">= 2.2.2",       :require => false
+gem "guard-livereload",        :require => false
+gem "rack-livereload"
 
 end
-
+gem 'puma'
 gem 'spring'
 gem "rb-fsevent",              :require => false
 

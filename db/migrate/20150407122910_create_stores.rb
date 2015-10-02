@@ -3,7 +3,7 @@ class CreateStores < ActiveRecord::Migration
     create_table :stores do |t|
       t.belongs_to :user, index: true
       t.string :name
-      t.integer :storetype
+      t.string :storetype
       t.string :image
       t.text :detail
       t.text :offer
@@ -20,6 +20,7 @@ class CreateStores < ActiveRecord::Migration
       t.integer :opradius
       t.integer :referer
       t.decimal :thrusold, null: false, default: 100.0
+      t.integer :coins, default: 0
 
       t.timestamps null: false
     end
