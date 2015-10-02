@@ -1,0 +1,2 @@
+class UserEatery < ActiveRecord::Base
+end

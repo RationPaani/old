@@ -1,0 +1,17 @@
+<%= render 'layouts/header' %>
+<%= title 'Help' %>
+     <h1 style="color:#fff;">Help</h1>
+   <div class="row">
+  <div class="col-md-3">
+    </div>
+  <div class="col-md-6 jumbotron">
+    <p style="font-size:16px;">
+     We recently launched beta version of our electronic platform,so you will find some glitches .We are trying to remove all these technical glitches so that it can be free to go to all of you.<br/>
+     For any help regarding for our platform,kindly send us the mail on <b><u>support@rationpaani.in</b></u>.We will soon follow up with you & will provide best solution or your situation .We will be happy to help you any time .<br/>
+      <a href="http://www.rationpaani.in/"</a>.
+    </p>
+  </div>
+ <div class="col-md-3">
+   </div>
+  </div>
+

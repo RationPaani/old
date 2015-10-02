@@ -1,0 +1,25 @@
+<%= form_tag(controller: 'categories', action: 'subcategorise', method: 'post') do %>
+
+  <div class="field">
+  <%= collection_select(:catsub, :category_id, @category, :id, :name) %>
+  </div>
+
+  <% @subable.each_with_index do |cat, index|%>
+    <div class="field">
+    <%= check_box_tag("item_checked[#{index}]", cat.id) %>
+    <%= label_tag("item_checked[#{index}]", "#{cat.name}") %>
+    </div>
+  <% end %>
+
+  <!-- <div class="field">
+    <%= label_tag :subcats %><br>
+    <%= text_field_tag :subcats %>
+  </div>
+  <div class="field">
+    <%= label_tag :filterables %><br>
+    <%= text_field_tag :filterables %>
+  </div> -->
+  <div class="actions">
+    <%= submit_tag("Add") %>
+  </div>
+<% end %>

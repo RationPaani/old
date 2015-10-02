@@ -1,0 +1,77 @@
+<%= render 'layouts/header' %>
+<div class="container" style="text-allign:center; padding:0 50px">
+<h2>Your Cart</h2>
+<hr/>
+<% if(@cart.first) %>
+<table style="width:100%">
+  
+  <tr height="35" style="background-color:#eee"><th>&nbsp; Product</th><th>Quantity</th><th>Cost</th><th>Edit</th></tr>
+  <% total = 0 %>
+  <% etotal = 0 %>
+  <% store = [] %>
+  <% ordervalue = [] %>
+  <% item = [] %>
+  <% freq = [] %>
+  <% pxfS = [] %>
+  <% spid = [] %>
+  <% stotal = [] %>
+
+    <% @cart.each do |id, q| %>
+    <% unless(Product.find(id).store.user == current_user) %>
+    <% storeid = Product.find(id).store_id %>
+    <% product = Product.find(id).id %>
+    
+    <% item[storeid] ||= [] %>
+    <% item[storeid] << product %>
+    <% freq[storeid] ||= [] %>
+    <% freq[storeid][product] = q %>
+    <% spid[storeid] ||= [] %>
+    <% spid[storeid][product] = id %>
+    <% pxfS[storeid] ||= [] %>
+    <% pxfS[storeid][product] = Product.find(id).price*q %>
+    <% stotal[storeid] = (stotal[storeid] || 0) + pxfS[storeid][product] %>
+    <% if !(store.include?(storeid)) %>
+    <% store << storeid %>
+    <% end %>
+    <% end %>
+  <% end %>
+  <% store.each do |stored| %>
+  <% if(stotal[stored] >= Store.find(stored).thrusold) %>
+  <% etotal = etotal + stotal[stored] %>
+  <% end %>
+    <tr><td colspan="4" style="padding-top:20px;">
+     <strong><%= Store.find(stored).name %></strong>
+    </td></tr>
+  <% item[stored].each do |itemo| %>
+  <tr>
+   <% total = total + pxfS[stored][itemo] %>   
+    <td><%= Product.find(itemo).name %></td><td><%= freq[stored][itemo] %></td><td><%= pxfS[stored][itemo] %></td>
+   <td><%= link_to "+", add_to_path(store_product: spid[stored][itemo].to_i), method: :put, class: "btn btn-default btn-sm" %> <%= link_to "-", remove_from_path(store_product: spid[stored][itemo].to_i), method: :put, class: "btn btn-default btn-sm" %></td>
+  </tr>
+  <% end %>
+  <tr>
+     <td colspan="4">
+      <div class="row">
+     <div class="col-sm-3">
+     <strong>Order Value: </strong>Rs. <%= stotal[stored] %>
+     </div>
+     <div class="col-sm-9">
+     <% if(stotal[stored] >= Store.find(stored).thrusold) %><span style="color:#0b0; font-size:14px;"> Minimum cart value reached </span>
+     <% else %><span style="color:red">Rs.<%= Store.find(stored).thrusold - stotal[stored] %> away from minimum cart value..</span>
+     <% end %>
+     </div>
+     </div>
+     </td>
+  </tr>
+  <% end %>
+  <tr><td colspan="4" height="40"></td></tr>
+  <tr style="border-top:solid 1px #ddd">
+    <td colspan="3"><strong> Total </strong></td><td><%= total %></td>
+  </tr>
+</table><br/>
+<div><div class="col-sm-6"></div><div class="col-sm-4 text-right"><% if(etotal > 0) %> Proceed with eligible orders ( Rs.<%= etotal %> )</div><div class="col-sm-2">
+<%= link_to "Proceed", checkadd_path, class: "btn btn-primary btn-sm" %></div><% else %>None of your orders is eligible to checkout. Kindly add more products.</div><% end %></div>
+ <% else %>
+  <h3> Your cart is empty. <%= link_to "Browse Stores", stores_path %> in your area</h3> 
+   <% end %>
+   </div>

@@ -1,0 +1,65 @@
+<%= render 'layouts/header' %>
+<%= title 'User Profile' %>
+ <div id="wrapper">
+ <ul class="nav navbar-nav side-nav side-nav-left collapse navbar-collapse navbar-ex1-collapse"><br/>
+    <% if (current_user && params[:id] == current_user.id.to_s) %>
+    <div><strong>Personal</strong><br/>
+       <%= link_to profile_path(current_user) do %>
+       <i class="fa fa-folder-open-o"></i> Your profile   
+        <% end %>
+        <%= link_to "edit",controller:"users",action: "edit",id:@user do %>
+            <i class="fa fa-cog"></i> Edit your profile   
+        <% end %>
+        <%= link_to history_path do %>
+            <i class="fa fa-bar-chart-o"></i> Purchase History
+        <% end %> 
+        <%= link_to new_store_path do %>
+           <i class="fa fa-shopping-cart"></i> Create a store
+        <% end %>       
+    </div>    
+     <% if(User.find(current_user).stores.first) %>
+	<hr/>
+	<li><strong>Business</strong></li>
+		<% User.find(current_user).stores.each do |store| %>
+		<li><%= store.name %>
+		<%= link_to "/#{store.storetype}/#{store.id}" do %><i class="fa fa-cube"></i> Manage products<% end %>
+		<%= link_to edit_store_path(id: store) do %><i class="fa fa-cog"></i></i> Edit Store Detail<% end %>
+		 <a href="#"><i class="fa fa-bar-chart-o"></i> Orders</a>
+		</li>
+	<% end %>
+	<% end %>
+     
+     <% end %>
+ </ul>
+ <div class ="container-fluid">
+ 
+ <div class="row">
+<h3>
+  <strong> <%= @user.name %> </strong>
+</h3>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+</div>
+<div class="row" style="background-color:#eef">
+<div class="col-sm-1">Order Id</div><div class="col-sm-2">Buyer</div><div class="col-sm-4">Items</div><div class="col-sm-2">Cost</div>
+</div>
+<% @orders.each do |order| %><hr/>
+<div class="row" style="font-size:13px;">
+<div class="col-sm-2"><%= order.id %></div><div class="col-sm-2"><%= order.store.name %></div>
+<div class="col-sm-4"><ul style="font-size:12px">
+<% order.order_details.each do |odetail| %>
+<li><%= "#{odetail.product.name}"+" ("+"#{odetail.quantity}"+" x Rs. "+"#{odetail.mrp}"+")" %></li>
+<% end %>
+</ul>
+</div>
+<div class="col-sm-2">Rs. <%= order.ordervalue %></div>
+<div class="col-sm-2"><%= link_to "x", remove_history_path(history: order.id), method: :put, class: "btn btn-default btn-sm" %></div>
+</div>
+<% end %>
+</div>
+ <ul class="nav navbar-nav side-nav side-nav-right collapse navbar-collapse navbar-ex1-collapse">
+ <%= render 'layouts/location'%>
+ </ul>
+</div>
+ 

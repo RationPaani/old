@@ -1,0 +1,17 @@
+class CreateUserProducts < ActiveRecord::Migration
+  def change
+    create_table :user_products do |t|
+      t.integer :user_id
+      t.integer :product_id
+      t.decimal :price
+      t.integer :stock, null: false, default: 10
+      t.boolean :in_w, null: false, default: false
+      t.boolean :in_r, null: false, default: false
+
+      t.timestamps null: false
+    end
+   #add_index :user_products, :user_id
+   #add_index :user_products, :product_id
+   add_index :user_products, [:user_id, :product_id], unique: true
+  end
+end

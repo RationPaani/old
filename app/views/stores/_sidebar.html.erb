@@ -1,0 +1,32 @@
+<ul class="nav navbar-nav side-nav side-nav-left collapse navbar-collapse navbar-ex1-collapse"><br/>
+ <div style="max-height:500px;margin-bottom:100px;overflow-y:scroll;">
+    <% if (current_user && @store.user == current_user) %>
+    <div><strong>Personal</strong><br/>
+       <%= link_to profile_path(current_user) do %>
+       <i class="fa fa-folder-open-o"></i> Your profile   
+        <% end %>
+        <%= link_to "edit",controller:"users",action: "edit",id: current_user do %>
+            <i class="fa fa-cog"></i> Edit your profile   
+        <% end %>
+        <%= link_to history_path do %>
+            <i class="fa fa-bar-chart-o"></i> Purchase History
+        <% end %> 
+        <%= link_to new_store_path do %>
+           <i class="fa fa-shopping-cart"></i> Create a store
+        <% end %>       
+    </div>    
+     <% if(User.find(current_user).stores.first) %>
+	<hr/>
+	<li><strong>Business</strong></li>
+		<% User.find(current_user).stores.each do |store| %>
+		<li><%= store.name %>
+		<%= link_to "/#{store.storetype}/#{store.id}" do %><i class="fa fa-cube"></i> Manage products<% end %>
+		<%= link_to edit_store_path(id: store) do %><i class="fa fa-cog"></i></i> Edit Store Detail<% end %>
+		<%= link_to order_requests_path(store: "store", id: store) do %><i class="fa fa-bar-chart-o"></i> Orders<% end %>
+		</li>
+	<% end %>
+	<% end %>
+     
+     <% end %>
+     </div>
+ </ul>

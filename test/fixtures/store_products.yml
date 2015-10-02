@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  product_id: 1
+  price: 9.99
+  stock: 1
+  in_w: false
+  in_r: false
+
+two:
+  user_id: 1
+  product_id: 1
+  price: 9.99
+  stock: 1
+  in_w: false
+  in_r: false

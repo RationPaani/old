@@ -1,0 +1,18 @@
+<div class="footer  collapse navbar-collapse navbar-ex1-collapse">
+      <div class = "row"  style="padding-bottom:5px">
+      <div class="col-sm-1"> </div>
+      <div class="col-sm-9">
+      <%= link_to user_path do %><u>Home</u><% end %> | 
+      <%= link_to about_path, target: "_blank" do %><u>About</u><% end %> | 
+      <%= link_to help_path, target: "_blank" do %><u>Help</u><% end %> | 
+      <%= link_to blogs_path, target: "_blank" do %><u>Blog</u><% end %> | 
+      <%= link_to new_store_path do %><i class="fa fa-shopping-cart"></i><u> Create a store</u><% end %>
+      </div>
+<div class="col-sm-2">
+     <a href="https://www.facebook.com/rationpaani" target="_blank"><i class="fa fa-facebook-official fa-lg"></i></a> | <a href="https://twitter.com/rationpaani1" target="_blank" ><i class="fa fa-twitter fa-lg"></i></a> | <a href="https://in.linkedin.com/company/rationpaani" target= "_blank" ><i class="fa fa-linkedin fa-lg"></i></a>
+    </div>
+
+   <div style="text-align:center;font-size:12px"> RationPaani.in &copy;2015</div>
+</div>
+   </div>
+

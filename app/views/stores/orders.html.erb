@@ -1,0 +1,38 @@
+<%= render 'layouts/header' %>
+<%= title 'User Profile' %>
+ <div id="wrapper">
+ <%= render 'sidebar' %>
+ <div class ="container-fluid">
+ 
+ <div class="row">
+<h3>
+  <strong> <%= @store.name %> </strong>
+</h3>
+  <strong>Email:</strong>
+  <%= current_user.email %>
+</p>
+</div>
+<% @orders.each do |order| %>
+<div class="row" style="font-size:13px;padding-top:5px;padding-bottom:5px;background-color:#eee">
+<div class="col-xs-4"><strong>Order ID: </strong><%= order.id %></div>
+<div class="col-xs-4"><strong>Buyer: </strong><%= order.user.name %></div>
+<div class="col-xs-4"><strong>Order Value: </strong>Rs. <%= order.ordervalue %></div>
+</div>
+<div class="row" style="font-size:13px;"><br/>
+<div class="col-xs-6"><strong>Items: </strong>
+<ul style="padding:0 15px">
+<% order.order_details.each do |odetail| %>
+<li><%= "#{odetail.product.name}"+" ("+"#{odetail.quantity}"+" x Rs. "+"#{odetail.mrp}"+")" %></li>
+<% end %>
+</ul>
+</div>
+<div class="col-xs-6"><strong>Delivery Address: </strong><br/><%= simple_format(order.address) %></div>
+</div>
+<div class="row text-right" style="font-size:13px;"><br/>
+<% if(order.sresponse !=1 && order.sresponse !=2) %><span  style="display:inline-block;padding:10px"><%= link_to "Mark Completed", completed_path(order: order.id), method: :put %></span><% end %>
+<% if(order.sresponse !=2 ) %><span  style="display:inline-block;padding:10px"><%= link_to "Reject", reject_order_path(order: order.id), method: :put %><% else %><span class="pull-right" style="padding:10px"><%= link_to "Accept", accept_order_path(order: order.id), method: :put %><% end %></span>
+<% if(order.sresponse !=0 ) %><span  style="display:inline-block;padding:10px"><%= link_to "Delete", remove_order_path(order: order.id), method: :put, class: "pull-right" %></span><% end %>
+</div>
+<% end %>
+</div>
+</div>

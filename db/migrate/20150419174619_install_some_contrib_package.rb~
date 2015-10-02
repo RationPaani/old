@@ -1,0 +1,4 @@
+class InstallSomeContribPackage < ActiveRecord::Migration
+  def change
+  end
+end

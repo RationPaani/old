@@ -1,0 +1,30 @@
+
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name),html:{role:'form',:style => "background-color:#FEFEFE; border:solid 1px #DDD;padding:10px" }) do |f| %>
+  <div class="form-group col-xs-6">
+    <%= f.label :email %>
+    <%= f.email_field :email,:class=>"form-control", :placeholder=> "Enter email", autofocus: true %>
+  </div>
+
+  <div class="form-group col-xs-6">
+    <%= f.label :password %>
+    <%= f.password_field :password , :class=>"form-control ", :placeholder=>"Password", autocomplete: "off" %>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="form-group">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end -%>
+
+  <div class="actions">
+    <%= f.submit "Submit", :class=>'btn btn-default btn-md' %>
+  </div>
+    <%= render "users/shared/links" %>
+  <% end %>
+  
+   
+  
+
+

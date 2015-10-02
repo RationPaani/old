@@ -1,0 +1,8 @@
+<% if(current_user) %>
+<% if(current_user.add1) %>
+<%= button_to "Proceed", checkout_path, class: "btn btn-default btn-sm" %> with following address:<br/>
+<%= current_user.name %><br/>
+<%= current_user.add1 %><br/>
+<% if(current_user.add2) %><% current_user.add2 %><br/> <% end %>
+<%= current_user.city %><% if(current_user.zip) %> - <%= current_user.zip %><% end %><br/>
+<%= current_user.state %><br/>

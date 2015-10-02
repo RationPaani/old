@@ -1,0 +1,151 @@
+/*
+ *= require_self
+ */
+body {
+  font-family: arial,sans-serif;
+  margin-top: 90px;
+  padding-bottom: 100px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: solid 1px #ddd;
+  background-color: #eee;
+  padding-top:10px;
+  z-index:9999;
+}
+.row{
+padding:0;
+margin:0;
+}
+ul.ui-autocomplete{
+   position: absolute;
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   border: solid 1px #999;
+   border-top-left-radius:2px;
+   border-top-right-radius:2px;
+   cursor: default;
+   z-index: 9999;
+   li {
+     background-color: #fff;
+     margin: 0;
+     padding: 0;
+     a, a:visited {
+       color: #555;
+       display: block;
+       padding: 3px 10px;
+     }
+     a.ui-state-hover,a.ui-state-active, a:hover {
+       background-color: #f8f8f8;
+       text-decoration: none;
+       color: #000;
+     }
+    }
+  }
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+#wrapper {
+    padding: 50px 0;
+}
+
+#page-wrapper {
+    width: 100%;
+    padding: 0;
+    background-color: #fff;
+}
+
+.huge {
+    font-size: 50px;
+    line-height: normal;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding: 0 225px;
+    }
+
+    #page-wrapper {
+        padding: 10px;
+    }
+}
+
+.nav-navbar>.open>.dropdown-menu {
+    float: left;
+    position: absolute;
+}
+
+ul.message-dropdown {
+    padding: 0;
+    max-height: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+li.message-preview {
+    width: 275px;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+li.message-preview>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+li.message-footer {
+    margin: 5px 0;
+}
+
+ul.alert-dropdown {
+    width: 200px;
+}
+
+/* Side Navigation */
+ .side-nav {
+        margin: 85px 0;
+        width: 100%;
+        overflow-x: hidden;
+        }
+
+@media(min-width:768px) {
+    .side-nav {
+    top:95px;
+        position: fixed;
+        margin: 0;
+        width: 225px;
+        min-height:600px;
+        overflow-x: hidden;
+        padding-bottom:60px;
+    }
+    }
+@media(min-width:768px) {
+    .side-nav-left {
+        left: 225px;
+        margin-left: -225px;
+    }
+    }
+    
+@media(min-width:768px) {
+    .side-nav-right {
+        right: 225px;
+        margin-right: -225px;
+    }
+    }
+    
+.side-nav a {
+display: inline-block !important;
+padding: 3px !important;
+min-width: 100px !important;
+}
+.side-nav li {
+float: none !important;
+margin:1px !important;
+}
+a.gre{
+background-color: #eee;
+}

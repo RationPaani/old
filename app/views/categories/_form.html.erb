@@ -1,0 +1,32 @@
+<%= form_tag(controller: 'categories', action: 'create', method: 'post') do %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= hidden_field_tag :store_id, params[:id] %>
+  <% [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14].each do |n| %>
+  <div class="field">
+    <%= label_tag "Category #{n+1}" %><br>
+    <%= text_field_tag(:"name[#{n}]") %>
+  </div>
+  <% end %>
+  <!-- <div class="field">
+    <%= label_tag :subcats %><br>
+    <%= text_field_tag :subcats %>
+  </div>
+  <div class="field">
+    <%= label_tag :filterables %><br>
+    <%= text_field_tag :filterables %>
+  </div> -->
+  <div class="actions">
+    <%= submit_tag("Add") %>
+  </div>
+<% end %>

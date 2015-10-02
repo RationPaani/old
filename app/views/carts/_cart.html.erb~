@@ -1,0 +1,33 @@
+<div class="container" style="text-allign:center; padding:0 50px">
+<h2>Your Cart</h2>
+<hr/>
+<% if(:cart.first) %>
+<table style="width:100%">
+  <% total = 0 %>
+  <% quantity = 0 %>
+  <tr height="35" style="background-color:#eee"><th>Product</th><th>Seller</th><th>Quantity</th><th>Price</th><th>Edit</th></tr>
+<% :cart.each do |id, q| %>
+  <tr>
+    <% product_id = StoreProduct.find(id).product %>
+    <% store = StoreProduct.find(id).store.name %>
+    <% product = product_id.name %>
+   <% price = StoreProduct.find(id).price * (q.to_i) %>
+   <% total = total + price %>
+   <% quantity = quantity + (q.to_i) %>
+   
+    <td><%= product %></td><td><%= store %></td><td><%= q %></td><td><%= price %></td>
+   <td><%= link_to "+", add_to_path(store_product: id.to_i), method: :put, class: "btn btn-default btn-sm" %> <%= link_to "-", remove_from_path(store_product: id.to_i), method: :put, class: "btn btn-default btn-sm" %></td>
+      
+   
+  </tr>
+  <% end %>
+  <td colspan="4" height="40">
+  <tr style="border-top:solid 1px #ddd">
+    <td colspan="3"><strong> Total </strong></td><td><%= total %></td>
+  </tr>
+</table><br/>
+<%= button_to "Checkout", checkout_path, method: "put", class: "btn btn-default btn-sm" %>
+ <% else %>
+  <h3> Your cart is empty. <%= link_to "Browse Stores", stores_path %> in your area</h3> 
+   <% end %>
+   </div>

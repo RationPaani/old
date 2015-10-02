@@ -1,0 +1,27 @@
+<%= render'layouts/header'%>
+<% title 'All Users' %>
+<h1 style ="color:#fff;">All users</h1>
+<div class="jumbotron">
+ <div class="row">
+ 
+  <div class="col-md-3"></div>
+<div class="col-md-6" >
+  <%= will_paginate %>
+<ul class="users" style="list-style:none">
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to(user.name, "#{user.id}") %>
+<% if user.geocoded? && user_signed_in?   %>
+     <% user.nearbys(100).each do |near_user| %>
+    <br/><%= link_to near_user.latitude, near_user %>, <%= link_to near_user.longitude, near_user %> (<%= near_user.distance.round(2) %> miles)
+<% end %>
+  <% end %>
+    </li>
+  <% end %>
+</ul>
+ <%= will_paginate %>
+</div>
+<div class ="col-md-3">
+   </div>
+  </div>
+</div>

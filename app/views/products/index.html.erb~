@@ -1,0 +1,36 @@
+<%= title 'Products List' %>
+<%= render 'layouts/header' %><br/>
+<div id="wrapper">
+ <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            
+<ul class="nav navbar-nav side-nav side-nav-left collapse navbar-collapse navbar-ex1-collapse">
+  <li><%= link_to "Grocery", products_path("Grocery") %></li>
+ <li><%= link_to "Ready to coock", products_path("rnt") %></li>
+ <li><%= link_to "Tea and Coffee", products_path("tnc") %></li>
+ <li><%= link_to "Masale", products_path("Masale") %></li>
+ <li><%= link_to "Oils", products_path('oils') %></li>              
+</ul>
+
+<div class="container-fluid">
+<div style="font-size:24px;text-align:center"><strong>Products</strong></div><hr/>
+     <div class ="row">
+       <% for product in @products %>
+      <div class="col-sm-3">  
+      <div class="thumbnail"  style="border:solid 1px #ddd;height:250px"> 
+       <%= link_to image_tag("#{product.user.id}/#{product.image}", size: '80x80'), product %>
+<hr>
+       <%= product.name %><br/>
+       MRP : Rs. <%= product.price %><br/>
+       <%= product.spec %>
+
+       <%= link_to "Edit",edit_product_path(product),:class => "btn btn-default btn-sm" %> |
+       <%= link_to "Destroy",product, :confirm => 'Are you sure?',:class => "btn btn-default btn-sm", :method => :delete %>
+        </div> <!--caption-->
+    </div> <!--thumb-->
+     <% end %>
+  </div> <!-- row -->
+
+  
+    <%= will_paginate @products %>
+    </div>
+  </div>

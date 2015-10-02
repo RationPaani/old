@@ -1,0 +1,13 @@
+class CreateVehicles < ActiveRecord::Migration
+  has_many :user_vehicles, dependent: :destroy
+  has_many :users, through: :user_vehicles
+
+  def change
+    create_table :vehicles do |t|
+      t.string :name
+      t.string :image
+
+      t.timestamps null: false
+    end
+  end
+end

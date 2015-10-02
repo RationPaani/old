@@ -1,0 +1,37 @@
+<%= render 'layouts/header' %>
+<div  id="wrapper">
+<% if(current_user && current_user.add1 && current_user.add1 != "") %>
+<h3>Proceed with following address:</h3>
+<%= current_user.name %><br/>
+<%= current_user.add1 %><br/>
+<% if(current_user.add2) %><% current_user.add2 %><br/> <% end %>
+<%= current_user.city %><% if(current_user.zip) %> - <%= current_user.zip %><% end %><br/>
+<%= current_user.state %><br/>
+<%= button_to "Send Enquiry", sendenqry_path, class: "btn btn-default btn-sm" %>
+<h1> OR </h1><hr/>
+<% end %>
+<h3>Provide Delivery Address: </h3><br/>
+<%= form_tag(sendeqry_path) do %>
+<div class="row"><div class="col-sm-6 form-group">
+    <%= text_field_tag(:dname, params[:dname], class: 'form-control', placeholder: 'Name *') %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+    <%= text_field_tag :dcontact, params[:dcontact], class: 'form-control', placeholder: 'Contact *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+  <%= text_field_tag :dadd1, params[:dadd1], class: 'form-control', placeholder: 'Address *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+  <%= text_field_tag :dstate, params[:dstate], class: 'form-control', placeholder: 'State *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+    <%= text_field_tag :dcity, params[:dcity], class: 'form-control', placeholder: 'City *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-4 form-group">
+    <%= text_field_tag :dzip, params[:dzip], class: 'form-control', placeholder: 'PIN code *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-2 form-group">
+    <%= submit_tag "Send Enquiry", class: 'btn btn-default' %>
+  </div></div>
+ <% end %>
+ </div>

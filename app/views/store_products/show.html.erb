@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @store_product.user_id %>
+</p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @store_product.product_id %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @store_product.price %>
+</p>
+
+<p>
+  <strong>Stock:</strong>
+  <%= @store_product.stock %>
+</p>
+
+<p>
+  <strong>In w:</strong>
+  <%= @store_product.in_w %>
+</p>
+
+<p>
+  <strong>In r:</strong>
+  <%= @store_product.in_r %>
+</p>
+
+<%= link_to 'Edit', edit_store_product_path(@store_product) %> |
+<%= link_to 'Back', store_products_path %>

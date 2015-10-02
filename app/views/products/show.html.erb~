@@ -1,0 +1,50 @@
+<%= render 'layouts/header' %>
+<div class ="container">
+  <div class = "row">
+   <div class = "col-md-2"></div>
+   <div class = "col-md-8" style ="background-color:#fafafa;border:solid 1px black;padding:10px">
+   <div class = "row">
+<div class = "col-md-6" >
+        <div class="thumbnail" style="border:1px solid #ddd;">
+    
+       <%= link_to image_tag("#{@product.user.id}/#{@product.image}"), "#" %>
+        </div> <!-- thumbnail-->
+       </div> <!-- md3 -->
+  <div class = "col-md-6">
+  <div class="caption">
+       <h5>
+       <strong><%= @product.name %></strong> <% if(@product.spec) %>(<%= @product.spec %>)<% end %></strong><br/>
+       </h5>
+ <p>
+  <strong>Price:</strong>
+  Rs. <%= @product.price %>
+</p>
+ <p>
+  <strong>Brand:</strong>
+  <%= @product.brand %>
+</p>
+<p>
+  <strong>Category:</strong>
+  <%= @product.category %>
+</p>
+        </div> <!--caption-->
+   </div> <!-- md3 -->
+   </div>
+   </div>
+<div class = "col-md-2"></div>
+</div>
+
+<div class = "row"><h3>Available at</h3><hr/>
+ <% for store in @stores do %>
+ <% store_product = @product.store_products.where(store_id: store.id).first %>
+ <strong><%= store.name %></strong>________ @ Rs. <%= store_product.price %>
+ <% unless(store.enable == false || store.user == current_user ) %>
+ <% if (session[:cart] && session[:cart].keys.include?(store_product.id.to_s)) %> Added to <%= link_to "Cart", cart_path, class: "btn btn-default btn-sm" %><% else %><%= link_to "Add to cart", add_to_path(store_product: store_product), method: :put, class: "btn btn-default btn-sm" %><% end %><% end %><br/>
+ <%= store.add1 %>,<%= store.add2 %>, <%= store.city %>, <%= store.state %> -  <%= store.zip %>
+ <hr/>
+ <% end %>
+ 
+ 
+</div>
+
+</div>

@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store_type: 1
+  store_name: MyString
+  store_image: MyString
+  store_detail: MyText
+  store_offer: MyText
+  state: MyString
+  city: MyString
+  zip: MyString
+  add1: MyString
+  add2: MyString
+  subs_status: 1
+  enable: false
+
+two:
+  store_type: 1
+  store_name: MyString
+  store_image: MyString
+  store_detail: MyText
+  store_offer: MyText
+  state: MyString
+  city: MyString
+  zip: MyString
+  add1: MyString
+  add2: MyString
+  subs_status: 1
+  enable: false

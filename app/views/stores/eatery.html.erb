@@ -1,0 +1,58 @@
+<%= render 'layouts/header' %>
+<div id="wrapper">
+<ul class="nav navbar-nav side-nav side-nav-left collapse navbar-collapse navbar-ex1-collapse">
+<div style="background-color:#fff;margin-top:10px"><%= image_tag("#{@store.user.id}/#{@store.image}",width: '160',height: '100') %></div><br/>
+
+</ul>
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-10">
+<h2>
+  <%= @store.name %>
+</h2>
+<%= @store.add1 %>,<%= @store.add2 %>, <%= @store.city %>, <%= @store.state %> -  <%= @store.zip %>
+<hr/>
+<p>
+  <strong>Detail:</strong>
+  <%= @store.detail %>
+</p>
+
+<p>
+  <strong>Offers:</strong>
+  <%= @store.offer %>
+</p>
+<hr/></div>
+<div class="col-sm-2">
+Subscribed by: <%= Favourite.where(store_id: @store.id).count %><br/>
+<% if(current_user && current_user == @store.user) %>
+<%= link_to 'Add More Products', new_store_product_path, class: "btn btn-default  btn-sm" %>
+<% else %><%= button_to "Subscribe", subscribe_path, class: "btn btn-default btn-sm" %>
+<% end %>
+
+</div>
+     <div class ="row">
+       <% for product in @products %>
+      <div class="col-sm-4">
+        <div style="height:200px">
+    <div class="col-sm-5">
+       <%= link_to image_tag("#{product.user.id}/#{product.image}",size: "80x80", class: 'img-responsive'), product %>
+       </div>
+       <div class="col-sm-7">
+       <h5>
+       <strong><%= product.name %></strong> (<%= product.spec %>)</strong><br/>
+       </h5>
+       <h5>
+       <strong>Rs. <%= product.store_products.where(store_id: params[:id]).first.price %></strong></h5><% unless(@store.enable == false || @store.user == current_user ) %><% if (session[:cart] && session[:cart].keys.include?(product.store_products.where(store_id: params[:id]).first.id.to_s)) %> Added to <%= link_to "Cart", cart_path, class: "btn btn-default btn-sm" %><% else %><%= link_to "Add to cart", add_to_path(store_product: product.store_products.where(store_id: params[:id]).first), method: :put, class: "btn btn-default btn-sm" %><% end %><% end %>
+       
+        </div> <!--caption-->
+      </div> <!-- thumbnail-->
+    </div> <!--thumb-->
+     <% end %>
+  </div> <!-- row -->
+
+    <%= will_paginate @products %>
+</div></div>
+<ul class="nav navbar-nav side-nav side-nav-right collapse navbar-collapse navbar-ex1-collapse">
+
+</ul>
+</div>

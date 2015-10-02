@@ -1,0 +1,34 @@
+<%= render'layouts/header'%>
+<% title 'Retail Sellers' %>
+<h1 style ="color:#fff;">Retail Sellers</h1>
+<div class="jumbotron">
+ <div class="row">
+  <div class="col-md-3"></div>
+<div class="col-md-6" style="background-color:lavender;border:1px solid black;">
+  <div class="row">
+    <form class="form-inline" role="form">
+  <%= form_tag stores_path, :method => :get,:class => "input-lg pull-left" do %>
+     <%= text_field_tag :query, params[:query],placeholder:"Search Here" %>
+       <%= submit_tag "Search", :name => nil,:class =>"btn btn-primary btn-md" %>
+   <% end %>
+  </form>
+  <%= will_paginate %>
+<ul class="users" >
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.name, user,{:style=>'color:#000;border:solid 1px red;'} %>
+<% if user.geocoded? && user_signed_in?   %>
+     <% user.nearbys(100).each do |near_user| %>
+    <br/><%= link_to near_user.latitude, near_user %>, <%= link_to near_user.longitude, near_user %> (<%= near_user.distance.round(2) %> miles)
+<% end %>
+  <% end %>
+    </li>
+  <% end %>
+</ul>
+ <%= will_paginate %>
+  </div>
+</div>
+<div class ="col-md-3">
+   </div>
+  </div>
+</div>

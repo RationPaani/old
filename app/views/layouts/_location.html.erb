@@ -1,0 +1,9 @@
+<div class="row">
+<h3>Change your location: </h3>
+<%= form_tag(setlocat_path) do %>
+<div class="form-group">
+	<div class="col-xs-9"><%= text_field_tag :locat, params[:locat], placeholder: "#{locat}", autofocus: true, class: "form-control" %></div><div class="col-xs-3">
+	<%= submit_tag "Change", class: "btn btn-primary" %>
+	</div></div>
+<% end %>
+</div>

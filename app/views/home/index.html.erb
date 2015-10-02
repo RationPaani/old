@@ -1,0 +1,43 @@
+<%= title 'Retail supply chains - Sell Buy Connect' %>
+<%= render 'layouts/homeheader' %>
+
+<div class="container-fluid">
+  <div class="row" style="padding-top:8%">
+    <div class="col-sm-3"></div>
+    <%= form_tag("search", method: "get", id: "searchform") do %>
+    <div class="col-sm-6">
+    <div class="form-group">
+     <div class="col-xs-10" style="padding-right:2px;">
+    <%= autocomplete_field_tag :query, params[:query], autocomplete_product_name_path, autofocus: true, placeholder:"Search products or stores",class: 'form-control' %>
+    </div>
+    <div class="col-xs-2" style="padding-left:0;">
+    <%= submit_tag "Search", class: "btn btn-primary" %></div>
+    </div>
+    </div>  <!--col 6 -->
+   <% end %>
+    <div class="col-sm-3" style="padding:0"></div>
+</div> <!--row -->
+   <br/><br/><hr>
+ <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-3" style="min-width:300px">
+    <div style="width:290px; text-align:right;margin:0 auto">
+     <%= link_to "retail", :style => "text-decoration:none;" do %><%= image_tag("retail.jpeg",:style=>"border-radius:5px;box-shadow:0 0 3px #000;width:290px;height:190px;") %><span style="position:relative;top:-55px;padding:2px 6px;border-radius:20px;box-shadow:0 0 25px 1px #000 inset;box-shadow:0 0 5px #000;text-shadow:0 0 5px #000;font-size:28px;color:#fff;font-weight:bold">Retail</span><% end %>
+     </div></div>
+     <div class="col-xs-12 col-sm-6 col-sm-3" style="min-width:300px">
+     <div style="width:290px; text-align:right;margin:0 auto">
+     <%= link_to "eatery", :style => "text-decoration:none;" do %><%= image_tag("eatery.jpeg",:style=>"border-radius:5px;box-shadow:0 0 3px #000;width:290px;height:190px;") %><span style="position:relative;top:-55px;padding:2px 6px;border-radius:20px;box-shadow:0 0 25px 1px #000 inset;box-shadow:0 0 5px #000;text-shadow:0 0 5px #000;font-size:28px;color:#fff;font-weight:bold">Eatery</span><% end %>
+     </div></div>
+     <div class="col-xs-12 col-sm-6 col-sm-3" style="min-width:300px">
+     <div style="width:290px; text-align:right;margin:0 auto">
+     <%= link_to "wholesale", :style => "text-decoration:none;" do %><%= image_tag("wholesale.jpeg",:style=>"border-radius:5px;box-shadow:0 0 3px #000;width:290px;height:190px;") %><span style="position:relative;top:-55px;padding:2px 6px;border-radius:20px;box-shadow:0 0 25px 1px #000 inset;box-shadow:0 0 5px #000;text-shadow:0 0 5px #000;font-size:28px;color:#fff;font-weight:bold">Wholesale</span><% end %>
+     </div></div>
+     <div class="col-xs-12 col-sm-6 col-sm-3" style="min-width:300px">
+     <div style="width:290px; text-align:right;margin:0 auto">
+     <%= link_to "logistics", :style => "text-decoration:none;" do %><%= image_tag("logistics.jpeg",:style=>"border-radius:5px;box-shadow:0 0 3px #000;width:290px;height:190px;") %><span style="position:relative;top:-55px;padding:2px 6px;border-radius:20px;box-shadow:0 0 25px 1px #000 inset;box-shadow:0 0 5px #000;text-shadow:0 0 5px #000;font-size:28px;color:#fff;font-weight:bold">Logistics</span><% end %>
+     </div></div>
+</div></div>
+<script>
+$('#query').bind('railsAutocomplete.select', function(event, data){
+  $('#searchform').submit();
+});
+</script>

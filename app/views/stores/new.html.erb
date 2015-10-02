@@ -1,0 +1,100 @@
+<%= render 'layouts/header' %>
+<div class="container" style="padding:10px;" >
+ <div class="row">
+
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-8" style= "background-color:#FAFAFA;border:solid 1px #DDD">
+   <h2 class="text-center"> Create Store</h2><hr/>
+   <%= form_for(@store) do |f| %>
+    <% if @store.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@store.errors.count, "error") %> prohibited this store from being saved:</h2>
+
+      <ul>
+      <% @store.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="row"><div class="col-sm-3 form-group">
+    <%= f.label :type %>*<br>
+    <%= f.select(:storetype, [['Retail', 'retail'], ['Eatery', 'eatery'], ['Wholesale', 'wholesale'], ['Logistics', 'logistics']], {}, class: 'form-control') %>
+    
+    </div></div>
+      <div class="row"><div class="col-sm-3 form-group">
+    <%= f.hidden_field :enable, value: true %>
+  </div></div>
+    
+  <div class="row"><div class="col-sm-6 form-group">
+    <%= f.label :name %>*<br>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div></div>
+  <strong>Address:</strong>*<br>
+  <div class="form-group"></div>
+  <div class="row"><div class="col-sm-6 form-group">
+  <%= f.text_field :add1, class: 'form-control', placeholder: 'Address line 1' %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+    <%= f.text_field :add2, class: 'form-control', placeholder: 'Address line 2' %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+  <%= f.text_field :state, class: 'form-control', placeholder: 'State' %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+    <%= f.text_field :city, class: 'form-control', placeholder: 'City' %>
+  </div></div>
+  <div class="row"><div class="col-sm-4 form-group">
+    <%= f.text_field :zip, class: 'form-control', placeholder: 'PIN code' %>
+  </div></div>
+ <!--  <div class="field">
+    <%= f.label :subcription %><br>
+    <%= f.number_field :subcription %>
+  </div>
+  <div class="field">
+    <%= f.label :enable %><br>
+    <%= f.check_box :enable %>
+  </div> 
+    <div class="field">
+    <%= f.label :offer %><br>
+    <%= f.text_area :offer %>
+  </div>
+  -->
+  <div class="row"><div class="col-sm-6 form-group">
+    <%= f.label :detail %><br>
+    <%= f.text_area :detail, class: 'form-control', placeholder: 'eg. short description, timing, services' %>
+  </div></div>
+
+  <!-- <div class="row"><div class="col-sm-6 form-group">
+    <%= f.label :image, "Store image" %><br>
+    <%= f.file_field :image, class: 'btn btn-default', :onchange => "check_file()" %>
+  </div></div> -->
+  <div class="row"><div class="col-sm-3 form-group">
+    <%= f.label :referer %><br>
+    <%= f.text_field :referer, class: 'form-control', placeholder: 'Referer Id' %>
+  </div></div>
+  <div class="row"><div class="col-sm-2 form-group">
+    <%= f.submit class: 'btn btn-default' %>
+  </div></div>
+<% end %></div>
+<div class="col-sm-2">
+  </div>
+ </div>
+</div>
+<script>
+function check_file(){
+        str=document.getElementById('product_image').value.toUpperCase();
+        suffix=".JPG";
+        suffix2=".JPEG";
+        suffix3=".PNG";
+        if(str.indexOf(suffix, str.length - suffix.length) == -1&&
+        str.indexOf(suffix2, str.length - suffix2.length) == -1&&
+        str.indexOf(suffix3, str.length - suffix3.length) == -1)
+        {
+        alert('File type not allowed,\nAllowed file: *.jpg,*.jpeg');
+            document.getElementById('fileToUpload').value='';
+        }
+    }
+    </script>

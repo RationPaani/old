@@ -1,0 +1,56 @@
+<%= render 'layouts/header' %>
+<div class = "container">
+ <div class= "row">
+  <div class = "col-md-2"></div>
+   <div class = "col-md-8" style = "background-color:#eee;box-shadow:0 0 5px #666">
+   <div class="row">
+    <div class = "col-md-3"></div>
+     <div class = "col-md-6">
+     <h2 style ="color:#666;text-align:center">Edit Account Details</h2><hr/>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+<div class="form-group">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true , class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :password, "New Password" %>
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    <i style="font-size:11px">(leave blank if you don't want to change password)</i>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation, "Enter the password again" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    <i style="font-size:11px">(leave blank if you are not changing the password)</i>
+  </div>
+
+  <div class="form-group">
+    Confirm with your current password to apply changes<br />
+    <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group pull-right">
+    <%= f.submit "Update" ,:class => 'btn btn-primary' %> 
+    <%= link_to "Cancel", :back, :class => 'btn btn-default' %>
+  </div>
+  <hr/><hr/><hr/>
+<% end %>
+<h3>Delete your account</h3>
+<p>Unhappy? <%= link_to "Delete account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-default pull-right' %></p><br/><br/><br/>
+</div>
+<div class = "col-md-3"></div>
+</div></div>
+<div class= "col-md-2"></div>
+</div>
+</div>

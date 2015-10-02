@@ -1,0 +1,59 @@
+<%= render 'layouts/header' %>
+<div class="container" style="text-allign:center; padding:0 50px">
+<h2>Your Cart</h2>
+<hr/>
+<% if(@enqry.first) %>
+<table style="width:100%">
+  
+  <tr height="35" style="background-color:#eee"><th>&nbsp; Product</th><th>Quantity</th><th>Cost</th><th>Edit</th></tr>
+  <% total = 0 %>
+  <% etotal = 0 %>
+  <% store = [] %>
+  <% ordervalue = [] %>
+  <% item = [] %>
+  <% freq = [] %>
+  <% pxfS = [] %>
+  <% spid = [] %>
+  <% stotal = [] %>
+
+    <% @enqry.each do |id, q| %>
+    <% unless(Product.find(id).store.user == current_user) %>
+    <% storeid = Product.find(id).store_id %>
+    <% product = Product.find(id).id %>
+    
+    <% item[storeid] ||= [] %>
+    <% item[storeid] << product %>
+    <% freq[storeid] ||= [] %>
+    <% freq[storeid][product] = q %>
+    <% spid[storeid] ||= [] %>
+    <% spid[storeid][product] = id %>
+    <% pxfS[storeid] ||= [] %>
+    <% pxfS[storeid][product] = Product.find(id).price*q %>
+    <% stotal[storeid] = (stotal[storeid] || 0) + pxfS[storeid][product] %>
+    <% if !(store.include?(storeid)) %>
+    <% store << storeid %>
+    <% end %>
+    <% end %>
+  <% end %>
+  <% store.each do |stored| %>
+    <tr><td colspan="4" style="padding-top:20px;">
+     <strong><%= Store.find(stored).name %></strong>
+    </td></tr>
+  <% item[stored].each do |itemo| %>
+  <tr>
+    <td><%= Product.find(itemo).name %></td>
+   <td><%= link_to "+", addenqry_path(store_product: spid[stored][itemo].to_i), method: :put, class: "btn btn-default btn-sm" %> <%= link_to "-", removeenqry_path(store_product: spid[stored][itemo].to_i), method: :put, class: "btn btn-default btn-sm" %></td>
+  </tr>
+  <% end %>
+  <% end %>
+  <tr><td colspan="4" height="40"></td></tr>
+  <tr style="border-top:solid 1px #ddd">
+    <td colspan="3"><strong> Total </strong></td><td><%= total %></td>
+  </tr>
+</table><br/>
+<div><div class="col-sm-6"></div><div class="col-sm-4 text-right"></div><div class="col-sm-2">
+<%= link_to "Proceed", checkadd_path, class: "btn btn-primary btn-sm" %></div></div>
+ <% else %>
+  <h3> Your list is empty. <%= link_to "Browse Stores", stores_path %> in your area</h3> 
+   <% end %>
+   </div>

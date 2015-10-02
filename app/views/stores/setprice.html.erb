@@ -1,0 +1,62 @@
+<%= render 'layouts/header' %>
+<div id="wrapper">
+<div class="container-fluid" style="min-height:500px">
+<div class="row">
+<div class="col-sm-10">
+<h2>
+  <%= @store.name %>
+</h2>
+<%= @store.add1 %>,<%= @store.add2 %>, <%= @store.city %>, <%= @store.state %> -  <%= @store.zip %>
+<hr/>
+<p>
+  <strong>Detail:</strong>
+  <%= @store.detail %>
+</p>
+
+<p>
+  <strong>Offers:</strong>
+  <%= @store.offer %>
+</p>
+<hr/>
+<div class="col-lg-12">
+     <div class ="row">
+     
+     <%= form_tag updateprice_path, method: "put" do %>
+     
+       <% for product in @products %>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="thumbnail" style="border:1px solid #ddd;">
+     <%= fields_for "prices[]", product do |f| %>
+       <%= link_to image_tag("#{product.store.id}/#{product.image}",size: "80x80"), product %>         
+       <div class="caption">
+       <h5>
+       <strong><%= product.name %></strong> (<%= product.specs %>)</strong><br/>
+       </h5>
+       <h5>
+       <strong>MRP <%= product.price %></strong>
+       </h5>
+        <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :stock %><br>
+    <%= f.number_field :stock %>
+  </div>
+        </div> <!--caption-->
+      </div> <!-- thumbnail-->
+    </div> <!--thumb-->
+     
+     <% end %>
+      <% end %>
+      <%= submit_tag "Update" %>
+      <% end %>
+  </div> <!-- row -->
+
+  
+    <%= will_paginate @products %>
+  
+     </div> <!--col-lg-9-->
+
+<%= link_to 'Add More', new_store_product_path %>
+</div></div></div></div>

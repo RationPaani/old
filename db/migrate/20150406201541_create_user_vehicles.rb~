@@ -1,0 +1,16 @@
+class CreateUserVehicles < ActiveRecord::Migration
+
+  def change
+    create_table :user_vehicles do |t|
+      t.belongs_to :user
+      t.belongs_to :vehicle
+      t.decimal :rate
+      t.integer :quantity
+      t.text :op_area
+      t.integer :op_radius
+
+      t.timestamps null: false
+    end
+  add_index :user_vehicles, [:user_id, :vehicle_id], unique: true
+  end
+end

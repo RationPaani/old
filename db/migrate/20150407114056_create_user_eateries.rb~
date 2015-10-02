@@ -1,0 +1,16 @@
+class CreateUserEateries < ActiveRecord::Migration
+  def change
+    create_table :user_eateries do |t|
+      t.belongs_to :user
+      t.belongs_to :eatery
+      t.decimal :price
+      t.string :spec1
+      t.string :spec2
+      t.text :spec3
+      t.integer :category
+
+      t.timestamps null: false
+    end
+  add_index :user_eateries, [:user_id,:eatery_id], unique :true
+  end
+end

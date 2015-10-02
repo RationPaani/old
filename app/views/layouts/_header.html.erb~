@@ -1,0 +1,92 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="row" style="padding:10px">
+<button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+   <span class="sr-only">Toggle navigation</span>
+   <span class="icon-bar"></span>
+   <span class="icon-bar"></span>
+   <span class="icon-bar"></span>
+  </button>
+ <div class="navbar-header pull-left" style="min-width:220px">
+  <a href="http://www.rationpaani.in" style="font-size:30px;text-decoration:none">
+   <strong><span style="color:#f77">RationPaani</span><span style="color:#999">.in</span></strong>
+  </a>
+ </div>
+<div class="pull-left" style="width:40%;min-width:420px">
+  <%= form_tag(search_path, method: "get", id: "searchform") do %>
+  <div class="row form-group">
+   <div class="col-sm-10 col-xs-9" style="padding-left:4px;padding-right:2px">
+    <%= autocomplete_field_tag :query, params[:query], autocomplete_product_name_path, placeholder:"Search products or stores",class: 'form-control' %>
+   </div>
+   <div class="col-sm-2 col-xs-3" style="padding-left:0">
+    <%= submit_tag("Search", name: nil, class: "btn btn-primary") %>
+   </div>
+  </div>
+  <% end %><br/>
+</div>
+<div class="pull-right">
+<div class="collapse navbar-collapse navbar-ex1-collapse" style="overflow-x:hidden">  
+<ul class="nav navbar-nav navbar-right" style="font-size:13px">
+  <li class="pull-left" style="font-size:12px">
+  <%= link_to cart_path,{ :remote => true, 'data-toggle' =>  "modal", 'data-target' => "#modallocat", 'data-type' => "html" } do %><strong>Your Location: </strong><br/><%= locat %><% end %>
+  </li>
+ <li class="pull-left">
+  <%= link_to cart_path,{ :remote => true, 'data-toggle' =>  "modal", 'data-target' => "#modalcart", 'data-type' => "html" } do %><i class="fa fa-shopping-cart"></i> Cart 
+  <% end %>
+ </li>
+ <% if user_signed_in? %>
+ <li class="dropdown pull-left">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.name %> <b class="caret"></b> </a> 
+  <ul class="dropdown-menu" style="padding:10px;width:225px;border-top:none;background-color:#fff">
+   <li> User Data</li>
+   <li><%= link_to "Profile", profile_path(current_user) %></li>
+   <li><%= link_to "Purchase history", history_path(id: current_user) %></li>
+   <% if(User.find(current_user).stores.first) %>
+   <li class="divider"></li>
+   <li>Store Data</li>
+   <% User.find(current_user).stores.each do |store| %>
+   <li><%= link_to store.name, "/#{store.storetype}/#{store.id}" %></li>
+   <% end %>
+   <% end %>
+   <li class="divider"></li>
+   <li><%= link_to(destroy_user_session_path, method: :delete) do %><i class="fa fa-fw fa-power-off"></i> LogOut <% end %></li>
+  </ul>
+ </li> <!--dropdown-->
+ <% else %>
+ <li class="pull-left"><%= link_to new_user_session_path,{ :remote => true, 'data-toggle' =>  "modal", 'data-target' => "#myModal", 'data-type' => "html" } do %>
+  <i class="fa fa-fw fa-user"></i> LogIn
+  <% end %>
+ </li>
+ <li class="pull-left"><%= link_to new_user_registration_path  do %><i class="fa fa-fw fa-user"></i> Sign Up<% end %></li>
+ <% end %>
+</ul></div>
+</div></div>
+</nav>
+
+<div class="modal fade" id="myModal">
+<div class="modal-dialog">
+<div class="modal-content"  style="padding:40px">
+<%= render partial: 'users/sessions/new' %>
+<div style="text-align:center">OR <%= link_to " LogIn with Facebook", user_omniauth_authorize_path(:facebook) %><br/><br/></div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="modalcart">
+<div class="modal-dialog">
+<div class="modal-content"  style="padding:40px">
+<%= render partial: 'carts/index' %>
+</div>
+</div>
+</div>
+<div class="modal fade" id="modallocat">
+<div class="modal-dialog">
+<div class="modal-content"  style="padding:40px">
+<%= render partial: 'layouts/location' %>
+</div>
+</div>
+</div>
+<script>
+$('#query').bind('railsAutocomplete.select', function(event, data){
+  $('#searchform').submit();
+});
+</script>

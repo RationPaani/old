@@ -1,0 +1,27 @@
+<%= render 'layouts/header' %>
+<div  id="wrapper"><br/></br/>
+<h3>Provide Delivery Address: </h3><br/>
+<%= form_tag(checkout_path) do %>
+<div class="row"><div class="col-sm-6 form-group">
+    <%= text_field_tag(:dname, params[:dname], class: 'form-control', placeholder: 'Name *') %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+    <%= text_field_tag :dcontact, params[:dcontact], class: 'form-control', placeholder: 'Contact *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+  <%= text_field_tag :dadd1, params[:dadd1], class: 'form-control', placeholder: 'Address *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+  <%= text_field_tag :dstate, params[:dstate], class: 'form-control', placeholder: 'State *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-6 form-group">
+    <%= text_field_tag :dcity, params[:dcity], class: 'form-control', placeholder: 'City *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-4 form-group">
+    <%= text_field_tag :dzip, params[:dzip], class: 'form-control', placeholder: 'PIN code *' %>
+  </div></div>
+  <div class="row"><div class="col-sm-2 form-group">
+    <%= submit_tag "Checkout", class: 'btn btn-default' %>
+  </div></div>
+ <% end %>
+ </div>

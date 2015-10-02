@@ -1,0 +1,71 @@
+<%= render 'layouts/header' %>
+<%= title 'User Profile' %>
+ <div id="wrapper">
+ <ul class="nav navbar-nav side-nav side-nav-left collapse navbar-collapse navbar-ex1-collapse"><br/>
+ <div style="max-height:500px;margin-bottom:100px;overflow-y:scroll;">
+    <% if (current_user && params[:id] == current_user.id.to_s) %>
+    <div><strong>Personal</strong><br/>
+        <%= link_to "edit", controller:"users", action: "edit", id: @user do %>
+            <i class="fa fa-cog"></i> Edit account   
+        <% end %>
+        <%= link_to change_address_path do %>
+            <i class="fa fa-cog"></i> Change Address  
+        <% end %>
+        <%= link_to history_path do %>
+            <i class="fa fa-bar-chart-o"></i> Purchase History
+        <% end %> 
+        <%= link_to new_store_path do %>
+           <i class="fa fa-shopping-cart"></i> Create a store
+        <% end %>       
+    </div>
+     <% if(User.find(current_user).stores.first) %>
+	<hr/>
+	<li><strong>Business</strong></li>
+		<% User.find(current_user).stores.each do |store| %>
+		<li><%= store.name %>		
+		<%= link_to edit_store_path(id: store) do %><i class="fa fa-cog"></i> Edit Store Detail<% end %>
+		<%= link_to "/#{store.storetype}/#{store.id}" do %><i class="fa fa-cube"></i> Manage products<% end %>
+		<%= link_to "/stores/#{store.id}/stock&price" do %><i class="fa fa-cube"></i>Set Stock & Price<% end %>
+		<%= link_to orders_path(id: store) do %><i class="fa fa-bar-chart-o"></i> Orders<% end %>
+		</li>
+	<% end %>
+	<!-- <%= link_to "Add custom Products", new_product_path, :style => "color:#888" %> -->
+	<% end %>
+     
+     <% end %>
+     </div>
+ </ul>
+ <div class ="container-fluid">
+ 
+ <div class="row">
+<h3>
+  <strong> <%= @user.name %> </strong>
+</h3>
+  <strong>Email:</strong>
+<p>
+  <%= @user.email %>
+</p>
+<% okay ="#{current_user.add1}, #{current_user.add2}, #{current_user.city} - #{current_user.zip}, #{current_user.state}" %>
+<% okay.gsub! " - ,", ","  %>
+<% okay.gsub! ", -", ", PIN-"  %>
+<% okay.gsub! ", , ", ", "  %>
+<%= okay %>
+</div>
+<div class="row">
+<% if (current_user.favstores.first) %>
+<hr/>
+<h3>
+   Your Favorite Sellers
+</h3>
+<% current_user.favstores.each do |fav| %>
+<div class="col-sm-6">
+<% if(fav.image && fav.image != "") %><%= link_to image_tag("#{fav.user.id}/#{fav.image}", width: '80'), "/#{fav.storetype}/#{fav.id}" %>
+<% end %>
+<%= link_to "#{fav.name}", "/#{fav.storetype}/#{fav.id}" %>
+</div>
+<% end %>
+<% end %>
+</div>
+</div>
+</div>
+ 

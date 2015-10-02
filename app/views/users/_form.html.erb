@@ -1,0 +1,18 @@
+<div class="jumbotron">
+
+<%= check_box_tag(:Wholesaler) %>
+<%= label_tag(:whole_saler, "Wholesaler") %>
+
+<%= check_box_tag(:Logistics) %>
+<%= label_tag(:whole_saler, "Logistics") %>
+
+<%= check_box_tag(:Retailer) %>
+<%= label_tag(:whole_saler, "Retailer") %>
+</br>
+<%= form_tag("/search", method: "get",:placeholder='Search here') do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+</div>

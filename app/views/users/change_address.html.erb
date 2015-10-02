@@ -1,0 +1,41 @@
+<%= render 'layouts/header' %>
+<div class = "container">
+ <div class= "row"><br/><br/>
+  <div class = "col-sm-2"></div>
+   <div class = "col-md-8" style = "background-color:#eee;box-shadow:0 0 5px #666;">
+   <div class="row">
+   <div class = "col-sm-2"></div>
+   <div class = "col-md-8"><br/>
+     <h2 style ="color:#666;text-align:center">Your Address</h2><hr/>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="form-group">
+    <%= f.text_field :add1, autofocus: true, placeholder: "Address Line 1", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :add2, autofocus: true, placeholder: "Address Line 2", class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :state, autofocus: true, placeholder: "State", class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :city, autofocus: true, placeholder: "City", class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :zip, autofocus: true, placeholder: "PIN", class: "form-control"%>
+  </div>
+  <div class="form-group">
+   +91<%= f.number_field :contact, placeholder: "Contact No."%>
+  </div>
+  <div class="form-group">Confirm your password to apply changes
+    <%= f.password_field :current_password, autocomplete: "off", placeholder: " Current password" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Update", class: 'btn btn-primary pull-right' %>
+  </div>
+<% end %>
+<br/><br/><br/>
+ </div></div></div>
+<div class= "col-md-2"></div>
+</div></div>
