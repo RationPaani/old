@@ -2,14 +2,13 @@ role :app, %w{54.254.190.184}
 role :web, %w{54.254.190.184}
 role :db,  %w{54.254.190.184}
 
-server '54.254.190.184', user: 'ubuntu', roles: %w{web app}, my_property: :my_value
-
+server '54.254.190.184', user: 'ubuntu', roles: %w{web app}
 # set it globally
-  set :ssh_options, {
-    keys: %w(/home/optimus/aws_keypair.pem),
-    forward_agent: true,
-    auth_methods: %w(publickey)
-  }
+ # set :ssh_options, {
+  #  keys: %w(/home/optimus/aws_keypair.pem),
+   # forward_agent: true,
+   # auth_methods: %w(publickey)
+ # }
 # and/or per server
 # server 'example.com',
 #   user: 'user_name',
