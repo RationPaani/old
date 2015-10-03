@@ -1,7 +1,8 @@
-server '54.254.190.184', roles: [:web, :app, :db], primary: true
 # Change these
+server '54.254.190.184', roles: [:web, :app, :db], primary: true
+
 set :repo_url,        'git@github.com:RationPaani/old.git'
-set :application,     'RationPaani'
+set :application,     'rationpaani'
 set :user,            'ubuntu'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
