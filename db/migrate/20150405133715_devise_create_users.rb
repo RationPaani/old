@@ -20,7 +20,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.float :longitude
       t.boolean :user_tnc
       t.boolean :service_tnc
-      t.integer :subscription, :default: 0
+      t.integer :subscription, default: 0
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
