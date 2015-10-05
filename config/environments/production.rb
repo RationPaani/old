@@ -9,7 +9,7 @@ Rails.application.configure do
   config.assets.compile = true
   config.assets.digest = true
   config.log_level = :error
-  config.assets.precompile += ['*.scss', '*.css', '*.coffee', '*.js']
+  config.assets.precompile += ['*.scss', '*.css', '*.coffee', '*.js', '*.jpg', '*.png', '*.jpeg', '*.gif']
   config.i18n.fallbacks = true
   #config.force_ssl = true
   config.active_support.deprecation = :notify
