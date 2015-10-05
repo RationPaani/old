@@ -33,6 +33,14 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+before "deploy:symlink", "assets:precompile"
+
+namespace :assets do
+  desc "Compile assets"
+  task :precompile, :roles => :app do
+    run "cd #{release_path} && rake RAILS_ENV=#{rails_env} assets:precompile"
+  end
+end
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'

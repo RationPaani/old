@@ -44,6 +44,7 @@ end
    
    def new_product # New product addition 
     @product = Product.new
+    @store = Store.find(params[:id])
    end
 
 

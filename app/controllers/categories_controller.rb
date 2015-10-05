@@ -12,18 +12,24 @@ class CategoriesController < ApplicationController
   def show
   end
   def subcategories
-  subs = []
-  @category = Store.find(params[:id]).categories
-  @category.each do |cato|
-    cato.subcates.each do |ca|
-      subs << ca
-    end
-  end
-  @subable = @category.where("id not in (?) AND name != ? ", subs, "All")
+  
   end
   # GET /categories/new
   def new
     @category = Category.new
+
+    subs = []
+    if (Store.find(params[:id]).categories.first)
+      @scategory = Store.find(params[:id]).categories
+      @scategory.each do |cato|
+        if cato.subcates.first
+          cato.subcates.each do |ca|
+            subs << ca
+          end
+        end
+      end
+      @subable = subs.any? ? @scategory.where("id NOT IN (?)", subs) : @scategory
+    end
   end
 
   # GET /categories/1/edit

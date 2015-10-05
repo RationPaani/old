@@ -1,11 +1,16 @@
- <%= render 'layouts/header' %>
+<!-- 
+<%= render 'layouts/header' %>
 <div id="wrapper">
   <ul class="nav navbar-nav side-nav side-nav-left collapse navbar-collapse navbar-ex1-collapse">
     <div style="background-color:#fff;margin-top:10px">
      <% if(@store.image) %><%= image_tag("#{@store.user.id}/#{@store.image}",width: '160',height: '100') %><% end %></div><br/>
      <div>
-       <%= printcat(@maincats) %>
-
+       <% @maincats.each do |maincat| %>
+       <strong><%= maincat.name %></strong>strong>
+       <% maincat.subcates.each do |subcat| %>
+       <%= subcat.name %>
+       <% end %>
+       <% end %>
      </div>
    </ul>
    <div class="container-fluid">
@@ -45,13 +50,13 @@
                <strong><%= product.name %></strong> (<%= product.specs %>)</strong><br/>
              </h5>
              <h5>
-               <strong>Rs. <%= product.price %></strong></h5><% unless(@store.enable == false || @store.user == current_user ) %><% if (session[:cart] && session[:cart].keys.include?(product.id.to_s)) %> Added to <%= link_to "Cart", cart_path, class: "btn btn-default btn-sm" %><% else %><%= link_to "Add to cart", add_to_path(store_product: product), method: :put, class: "btn btn-default btn-sm" %><% end %><% end %>
+               <strong>Rs. <%= product.price %></strong></h5><% unless(@store.enable == false || @store.user == current_user ) %><% if (session[:enqry] && session[:enqry].keys.include?(product.id.to_s)) %> Added to <%= link_to "Enquiry List", enqry_path, class: "btn btn-default btn-sm" %><% else %><%= link_to "Add to enquiry list", addenqry_path(store_product: product), method: :put, class: "btn btn-default btn-sm" %><% end %><% end %>
 
-             </div> <!--caption-->
-           </div> <!-- thumbnail-->
-         </div> <!--thumb-->
+             </div> 
+           </div> 
+         </div> 
          <% end %>
-       </div> <!-- row -->
+       </div> 
 
        <%= will_paginate @products %>
      </div>
@@ -59,3 +64,4 @@
    <ul class="nav navbar-nav side-nav side-nav-right collapse navbar-collapse navbar-ex1-collapse">
    </ul>
  </div>
+ --> 

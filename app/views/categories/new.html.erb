@@ -1,5 +1,47 @@
+<div class="row">
+<div class="col-sm-1"></div>
+<div class="col-sm-5">
 <h1>New Category</h1>
-
+<br/>Input the names of all categories and subcategories(max 15 at a time)<br/><br/>
 <%= render 'form' %>
+</div>
+<div class="col-sm-1"></div>
+<div class="col-sm-5">
+<h1>Manage Subategories</h1>
+<% if(@scategory && @scategory != "") %>
+<%= form_tag(controller: 'categories', action: 'subcategorise', method: 'post') do %>
 
-<%= link_to 'Back', categories_path %>
+  <div class="field">
+  Parent Caregory: <%= collection_select(:catsub, :category_id, @scategory, :id, :name) %>
+  </div><br/>
+Select sub-categories for this parent category
+  <% @subable.each_with_index do |cat, index|%>
+    <div class="field">
+    <%= check_box_tag("item_checked[#{index}]", cat.id) %>
+    <%= label_tag("item_checked[#{index}]", "#{cat.name}") %>
+    </div>
+  <% end %>
+
+  <!-- <div class="field">
+    <%= label_tag :subcats %><br>
+    <%= text_field_tag :subcats %>
+  </div>
+  <div class="field">
+    <%= label_tag :filterables %><br>
+    <%= text_field_tag :filterables %>
+  </div> -->
+  <div class="actions">
+    <%= submit_tag("Add") %>
+  </div>
+<% @subable.each do |sus| %>
+sud.name
+<% end %>
+
+<% end %>
+
+
+<% else %>
+<br/>
+<h3> You need to create some categories first.</h3>
+<% end %>
+</div>

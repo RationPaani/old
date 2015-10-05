@@ -1,5 +1,5 @@
 <%- if controller_name != 'sessions' %>
-<hr/> Allready have an account? <%= link_to new_session_path(resource_name), :class => "btn btn-primary btn-sm" do %><i class="glyphicon glyphicon-user" style="color:#fff;"> Login </i><% end %><br />
+<hr/> Already have an account? <%= link_to new_session_path(resource_name), :class => "btn btn-primary btn-sm" do %><i class="glyphicon glyphicon-user" style="color:#fff;"> Login </i><% end %><br />
  <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>

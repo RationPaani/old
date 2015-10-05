@@ -27,6 +27,11 @@
   <strong>Category:</strong>
   <%= @product.category %>
 </p>
+<% if (current_user && @product.store.user == current_user) %>
+<p>
+  <strong> <%= link_to "Edit product details", editproduct_path(:store => @product.store.id) %></strong>
+</p>
+<% end %>
         </div> <!--caption-->
    </div> <!-- md3 -->
    </div>
