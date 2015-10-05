@@ -44,13 +44,13 @@ end
   def create
     @product = Product.new(product_params)
   uploaded_io = params[:product][:image]
-  directry = Rails.root.join('app/assets/images', @product.store_id.to_s)
+  directry = Rails.root.join('public/assets/images', @product.store_id.to_s)
   Dir.mkdir(directry) unless File.exists?(directry)
   File.open(File.join(directry, uploaded_io.original_filename), 'wb') do |file|
     file.write(uploaded_io.read)
-  end
-   
+  end   
     @product.image = uploaded_io.original_filename
+
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -65,7 +65,16 @@ end
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
-    respond_to do |format|
+    if (params[:product][:image])
+      uploaded_io = params[:product][:image]
+      directry = Rails.root.join('public/assets/images', @product.store_id.to_s)
+      Dir.mkdir(directry) unless File.exists?(directry)
+        File.open(File.join(directry, uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      @product.update(:image => uploaded_io.original_filename)
+    end
+    respond_to do |format|      
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }

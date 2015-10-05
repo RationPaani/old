@@ -1,1 +1,0 @@
-$.fn.datepicker.defaults_tr={monthNames:["Ocak","\u015eubat","Mart","Nisan","May\u0131s","Haziran","Temmuz","A\u011fustos","Eyl\xfcl","Ekim","Kas\u0131m","Aral\u0131k"],shortDayNames:["Pzt","Sal","\xc7ar","Per","Cum","Cts","Paz"],startOfWeek:1};

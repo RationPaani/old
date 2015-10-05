@@ -1,1 +1,0 @@
-$.fn.datepicker.defaults_pt={monthNames:["Janeiro","Fevereiro","Mar\xe7o","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],shortDayNames:["Dom","Seg","Ter","Qua","Qui","Sex","Sab"],startOfWeek:1},$.fn.datepicker.defaults_pt_BR=$.fn.datepicker.defaults_pt;

@@ -12,7 +12,7 @@ def require_permission
   end
 end
 def checkuri
-  unless(Store.exists?(:id => params[:id]) && (["retail", "wholesale", "logistics", "eatery", "stores"].include? (params[:store])))
+  unless(Store.exists?(:id => params[:id]) && (["retail", "wholesale", "logistics", "eatery", "stores", "images"].include? (params[:store])))
       render :template => 'error_pages/404', :layout => false, :status => :not_found
     #Or do something else here
   end
