@@ -72,10 +72,12 @@ end
         File.open(File.join(directry, uploaded_io.original_filename), 'wb') do |file|
         file.write(uploaded_io.read)
       end
-      @product.update(:image => uploaded_io.original_filename)
     end
-    respond_to do |format|      
+    respond_to do |format| 
       if @product.update(product_params)
+        if (params[:product][:image])
+        @product.update(:image => uploaded_io.original_filename)
+      end
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
