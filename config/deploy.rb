@@ -1,5 +1,5 @@
 # Change these
-server '54.254.190.184', roles: [:web, :app, :db], primary: true
+server '54.254.131.252', roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:RationPaani/old.git'
 set :application,     'rationpaani'

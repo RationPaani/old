@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   get 'stores/new', to: 'stores#new', as: :new_store
   get 'stores/:id/edit', to: 'stores#edit', as: :edit_store
+  put 'stores/:id', to: 'stores#updateprice', as: :updateprice
   get 'stores/:storetype/:id/add', to: 'store_products#new'
   get 'stores/:id/add', to: 'store_products#new', as: :new_store_product
   get 'stores/:id/stock&price', to: 'stores#setprice', as: :setprice
@@ -54,6 +55,7 @@ Rails.application.routes.draw do
   
   get ':store/:id/orders', to: 'stores#orders', as: :order_requests
   get ':store/:id/new_product', to: 'stores#new_product', as: :add_new_product
+  get 'products/:id/edit_product', to: 'products#edit', as: :editproduct
   get ':store/:id/manage_category', to: 'categories#new', as: :add_new_category
   get ':store/:id/manage_subcategories', to: 'categories#subcategories', as: :add_subcategory
   get ':store/:id', to: 'stores#show', as: :store
@@ -64,7 +66,6 @@ Rails.application.routes.draw do
 
   get 'store_products', to: 'store_products#index', as: :store_products
   post 'store_products/:id', to: 'store_products#create', as: :create_store_product
-  put 'store_products/:id', to: 'stores#updateprice', as: :updateprice
 
   get 'store_products/:id/edit', to: 'store_products#edit', as: :edit_store_product
   get 'store_products/:id', to: 'store_products#show', as: :store_product

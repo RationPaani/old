@@ -71,12 +71,8 @@
     <div style="background-color:#fff;margin-top:10px">
      <% if(@store.image) %><%= image_tag("#{@store.user.id}/#{@store.image}",width: '160',height: '100') %><% end %></div><br/>
      <div>
-       <% @maincats.each do |maincat| %>
-       <strong> <%= maincat.name %> </strong><br/>
-       <% maincat.subcates.each do |subcat| %>
-       <%= subcat.name %><br/>
-       <% end %>
-       <% end %>
+       <%= printcat(@maincats) %>
+
      </div>
    </ul>
    <div class="container-fluid">

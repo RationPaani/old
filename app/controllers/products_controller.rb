@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   before_filter :require_permission, only: [:edit, :update, :destroy]
 
 def require_permission
-  if(current_user != @product.user || current_user != 8)
+  if(current_user != @product.store.user)
     redirect_to user_path
     #Or do something else here
   end
@@ -36,6 +36,7 @@ end
 
   # GET /products/1/edit
   def edit
+    @store = Store.find(params[:store])
   end
 
   # POST /products

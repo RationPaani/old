@@ -29,7 +29,8 @@
         </div></div>
         <div class="row"><div class="col-sm-12 form-group">
           <%= f.label :category %><br>
-          <%= f.select(:category, [['Retail', 0], ['Eatery', 1], ['Wholesale', 2], ['Logistics', 3]], {}, class: 'form-control') %>
+          <%= f.collection_select(:category, @store.categories, :id, :name) %>
+          <!-- <%= f.select(:category, [['Retail', 0], ['Eatery', 1], ['Wholesale', 2], ['Logistics', 3]], {}, class: 'form-control') %> -->
         </div></div>
         <div class="row"><div class="col-sm-12 form-group">
           <%= f.label :image %><br>

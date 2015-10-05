@@ -74,7 +74,12 @@ end
  @products = Store.find(params[:id]).products.text_search(params[:query]).page(params[:page]).per_page(15)
  end
  def show
- @products = Store.find(params[:id]).products.text_search(params[:query]).page(params[:page]).per_page(15)
+  if(params[:cat] && params[:cat] != "")
+    @store = Store.find(params[:id])
+ @products = @store.products.where(category: @store.categories.where(name: params[:cat])).text_search(params[:query]).page(params[:page]).per_page(15)
+else
+  @products = Store.find(params[:id]).products.text_search(params[:query]).page(params[:page]).per_page(15)
+end
  subs = []
   @category = @store.categories
   @category.each do |cato|
