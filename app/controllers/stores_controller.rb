@@ -88,7 +88,7 @@ end
       subs << ca
     end
   end
-  @maincats = @category.where("id not in (?)", subs)
+  @maincats = subs.any? ? @category.where("id NOT IN (?)", subs) : @category
  end
   def retail
   
