@@ -39,7 +39,11 @@ Rails.application.routes.draw do
   
   post 'stores', to: 'stores#create'
 
-  get 'stores/new', to: 'stores#new', as: :new_store
+
+  get 'stores/new', to: 'stores#new', as: :new_store  
+  get ':store/:id/new_product', to: 'stores#new_product', as: :add_new_product
+  get 'products/:id/edit_product', to: 'products#edit', as: :editproduct
+  get ':store/:id/manage_category', to: 'categories#new', as: :add_new_category
   get 'stores/:id/edit', to: 'stores#edit', as: :edit_store
   put 'stores/:id', to: 'stores#updateprice', as: :updateprice
   get 'stores/:storetype/:id/add', to: 'store_products#new'
@@ -54,9 +58,6 @@ Rails.application.routes.draw do
   put 'stores/:id/accept_order', to: 'stores#accept_order', as: :accept_order
   
   get ':store/:id/orders', to: 'stores#orders', as: :order_requests
-  get ':store/:id/new_product', to: 'stores#new_product', as: :add_new_product
-  get 'products/:id/edit_product', to: 'products#edit', as: :editproduct
-  get ':store/:id/manage_category', to: 'categories#new', as: :add_new_category
   get ':store/:id/manage_subcategories', to: 'categories#subcategories', as: :add_subcategory
   get ':store/:id', to: 'stores#show', as: :store
 
