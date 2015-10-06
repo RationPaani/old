@@ -32,7 +32,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
-set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system app/assets/images}
+# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system app/assets/images}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -77,15 +77,7 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
-
-  desc "Creates symbolic links"
-  task :link_dependencies do
-   on roles :all do
-    execute "ln -nfs #{shared_path}/public/images #{release_path}/app/assets/images"
-   end
-  end
 end
-after :deploy, 'deploy:link_dependencies'
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
