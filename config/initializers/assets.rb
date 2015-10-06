@@ -14,7 +14,4 @@ Rails.application.config.assets.precompile += %w( autocomplete-rails.js )
  Rails.application.config.assets.precompile += %w( monologue/foundation_icons/social_foundicons.eot )
  Rails.application.config.assets.precompile += %w( monologue/foundation_icons/social_foundicons.woff )
  Rails.application.config.assets.precompile += %w( monologue/foundation_icons/social_foundicons.ttf )
- Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path|
-  Rails.application.config.assets.paths << path
-end
 
