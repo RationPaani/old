@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'search', to: 'home#search', as: :search
   get 'help' , to: 'home#help', as: :help
   get 'about', to: 'home#about', as: :about
+  get 'Research_Development', to: 'home#rnd', as: :rnd
   resources :products
   
   devise_for :users, controllers: {registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks"}

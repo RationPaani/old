@@ -9,6 +9,8 @@ class HomeController < ApplicationController
   end
   def help
   end
+  def rnd
+  end
   def about
   end
   def setlocat
