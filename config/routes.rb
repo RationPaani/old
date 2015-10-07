@@ -62,8 +62,8 @@ Rails.application.routes.draw do
   get ':store/:id/manage_subcategories', to: 'categories#subcategories', as: :add_subcategory
   get ':store/:id', to: 'stores#show', as: :store
 
-  patch 'stores', to: 'stores#update', as: :update_store
-  put ':store/:id', to: 'stores#update'
+  patch 'stores/:id', to: 'stores#update', as: :update_store
+  put 'stores/:id', to: 'stores#update'
   delete 'stores/:id', to: 'stores#destroy', as: :delete_store
 
   get 'store_products', to: 'store_products#index', as: :store_products

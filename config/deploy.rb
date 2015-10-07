@@ -75,7 +75,7 @@ namespace :deploy do
 
 before "deploy:restart", :symlink_directories
 task :symlink_directories do
-  	run "ln -nfs #{shared_path}/public/images #{release_path}/public/images"
+  	execute "ln -nfs #{shared_path}/public/images #{release_path}/public/images"
 end
 
   before :starting,     :check_revision
