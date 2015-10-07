@@ -1,5 +1,5 @@
  <%= render 'layouts/header' %>
-<div id="wrapper">
+ <div id="wrapper">
   <ul class="nav navbar-nav side-nav side-nav-left collapse navbar-collapse navbar-ex1-collapse">
     <div style="background-color:#fff;margin-top:10px">
      <% if(@store.image) %><%= image_tag("#{@store.user.id}/#{@store.image}",width: '160',height: '100') %><% end %></div><br/>
@@ -8,11 +8,17 @@
      </div>
    </ul>
    <div class="container-fluid">
-    <div class="row">
+   <div class="row">
       <div class="col-lg-10">
-        <h2>
-          <%= @store.name %>
-        </h2>
+        <br/>
+        <p>
+          <span style="font-size: 28px; fon-weight: bold;">
+            <%= @store.name %> 
+          </span>
+          <% if(@store.subcription && @store.subcription == 1) %>
+          <span style="color: #fff;background-color:green; font-family:gorgea; font-weight: bold; padding: 1px 5px"> &#8377;</span><span style="color: green; font-family:gorgea; font-weight: bold; border: solid thin #eee; padding: 1px 5px">Verified</span>
+          <% end %>
+        </p>
         <%= @store.add1 %>,<%= @store.add2 %>, <%= @store.city %>, <%= @store.state %> -  <%= @store.zip %>
         <hr/>
         <p>
@@ -24,37 +30,40 @@
           <strong>Offers:</strong>
           <%= @store.offer %>
         </p>
-        <hr/></div>
-        <div class="col-sm-2">
-          Subscribed by: <%= Favourite.where(store_id: @store.id).count %><br/>
-          <% if(current_user && current_user == @store.user) %>
-          <%= link_to 'Add More Products', add_new_product_path, class: "btn btn-default  btn-sm" %>
-          <% else %><%= button_to "Subscribe", subscribe_path, class: "btn btn-default btn-sm" %>
-          <% end %>
-        </div>
-        <div class ="row">
-         <% for product in @products %>
-         <div class="col-sm-4">
-          <div style="height:200px">
-            <div class="col-sm-5">
-             <%= link_to image_tag("#{product.store.id}/#{product.image}",size: "80x80", class: 'img-responsive'), product %>
-           </div>
-           <div class="col-sm-7">
-             <h5>
-               <strong><%= product.name %></strong> (<%= product.specs %>)</strong><br/>
-             </h5>
-             <h5>
-               <strong>Rs. <%= product.price %></strong></h5><% unless(@store.enable == false || @store.user == current_user ) %><% if (session[:cart] && session[:cart].keys.include?(product.id.to_s)) %> Added to <%= link_to "Cart", cart_path, class: "btn btn-default btn-sm" %><% else %><%= link_to "Add to cart", add_to_path(store_product: product), method: :put, class: "btn btn-default btn-sm" %><% end %><% end %>
+        <hr/>
+      </div>
+      <div class="col-sm-2">
+        <br/>
+        +<%= Favourite.where(store_id: @store.id).count %>
+        <% if(current_user && current_user == @store.user) %>
+         <br/><%= @store.coins %> Coins<br/><br/>
+        <%= link_to 'Add More Products', add_new_product_path, class: "btn btn-default  btn-sm" %>
+        <% else %><%= button_to "Subscribe", subscribe_path, class: "btn btn-default btn-sm" %>
+        <% end %>
+      </div>
+      <div class ="row" style="box-shadow: 0 -10px 5px #888; min-height:550px">
+       <% for product in @products %>
+       <div class="col-sm-4">
+        <div style="height:200px">
+          <div class="col-sm-5">
+           <%= link_to image_tag("#{product.store.id}/#{product.image}",size: "80x80", class: 'img-responsive'), product %>
+         </div>
+         <div class="col-sm-7">
+           <h5>
+             <strong><%= product.name %></strong> (<%= product.specs %>)</strong><br/>
+           </h5>
+           <h5>
+             <strong>Rs. <%= product.price %></strong></h5><% unless(@store.enable == false || @store.user == current_user ) %><% if (session[:cart] && session[:cart].keys.include?(product.id.to_s)) %> Added to <%= link_to "Cart", cart_path, class: "btn btn-default btn-sm" %><% else %><%= link_to "Add to cart", add_to_path(store_product: product), method: :put, class: "btn btn-default btn-sm" %><% end %><% end %>
 
-             </div> <!--caption-->
-           </div> <!-- thumbnail-->
-         </div> <!--thumb-->
-         <% end %>
-       </div> <!-- row -->
+           </div> <!--caption-->
+         </div> <!-- thumbnail-->
+       </div> <!--thumb-->
+       <% end %>
+     </div> <!-- row -->
 
-       <%= will_paginate @products %>
-     </div>
+     <%= will_paginate @products %>
    </div>
-   <ul class="nav navbar-nav side-nav side-nav-right collapse navbar-collapse navbar-ex1-collapse">
-   </ul>
  </div>
+ <ul class="nav navbar-nav side-nav side-nav-right collapse navbar-collapse navbar-ex1-collapse">
+ </ul>
+</div>
