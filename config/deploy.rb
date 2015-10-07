@@ -81,7 +81,9 @@ end
 
 before "deploy:restart", :symlink_directories
 task :symlink_directories do
+	on roles :all do
   	execute "ln -nfs #{shared_path}/public/images #{release_path}/public/images"
+  	end
 end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
