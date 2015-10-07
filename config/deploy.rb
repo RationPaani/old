@@ -77,7 +77,7 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
-end
+
 desc "Creates symbolic links"
   task :link_dependencies do
    on roles :all do
