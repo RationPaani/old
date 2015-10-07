@@ -78,13 +78,14 @@ namespace :deploy do
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
-
-before "deploy:restart", :symlink_directories
-task :symlink_directories do
-	on roles :all do
-  	execute "ln -nfs #{shared_path}/public/images #{release_path}/public/images"
-  	end
+desc "Creates symbolic links"
+  task :link_dependencies do
+   on roles :all do
+    execute "ln -nfs #{shared_path}/public/images #{release_path}/public/images"
+   end
+  end
 end
+after :deploy, 'deploy:link_dependencies'
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
