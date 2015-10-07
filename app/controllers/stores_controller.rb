@@ -222,7 +222,7 @@ end
   def update    
     respond_to do |format|
       if @store.update(store_params)
-        format.html { redirect_to store_path(:store => "store", :id => @store.id), notice: 'Store was successfully updated.' }
+        format.html { redirect_to store_path(:store => @store.storetype, :id => @store.id), notice: 'Store was successfully updated.' }
         format.json { render :show, status: :ok, location: @store }
       else
         format.html { render :edit }
