@@ -75,15 +75,15 @@ namespace :deploy do
 
   desc "Creates symbolic links"
   task :link_dependencies do
-   on roles(:app, :web) do
+   on roles(:app) do
     execute "ln -nfs #{shared_path}/public/images #{release_path}/public/images"
    end
   end
 
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
-  after  :finishing,	:link_dependencies
   after  :finishing,    :cleanup
+  after  :finishing,	:link_dependencies
   after  :finishing,    :restart
 end
 # ps aux | grep puma    # Get puma pid
